@@ -24,6 +24,14 @@ class Personnelcontroller extends Controller
         ]);
     }
 
+    public function refresh() {
+        $personnel = new Personnel();
+        $res = $personnel->refresh();
+        return response()->json([
+            "result" => $res
+        ]);
+    }
+
 
     public function show($id) {
         if(Personnel::where("id", $id)->exists()) {
