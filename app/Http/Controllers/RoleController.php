@@ -19,6 +19,14 @@ class RoleController extends Controller
      }
 
 
+     public function paginate() {
+        $res = Role::paginate();
+        return response()->json([
+            "result" => $res
+        ]);
+    }
+
+
      public function show($id) {
         if(Role::where('id', $id)->exists()) {
             $role = Role::findOrFail($id);
@@ -47,10 +55,10 @@ class RoleController extends Controller
 
      
     public function update(Request $request, $id) {
-        if(Role::where("id", $id)->exists()) {
+        if(Role::where('id', $id)->exists()) {
          $role = Role::find($id);
          $role->label = $request->label;
-         $res = $role->update($id);
+         $res = $role->update();
 
          return response()->json([
              "result" => $res
@@ -64,8 +72,9 @@ class RoleController extends Controller
 
 
     public function delete($id) {
-        if(Role::where("id", $id)->exists()) {
-            $res = Role::deleted($id);
+        if(Role::where('id', $id)->exists()) {
+            $role = Role::find($id);
+            $res = $role->delete();
 
             return response()->json([
                 "result" => $res

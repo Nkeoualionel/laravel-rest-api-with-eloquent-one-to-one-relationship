@@ -17,6 +17,14 @@ class Personnelcontroller extends Controller
     }
 
 
+    public function paginate() {
+        $res = Personnel::paginate();
+        return response()->json([
+            "result" => $res
+        ]);
+    }
+
+
     public function show($id) {
         if(Personnel::where("id", $id)->exists()) {
             $personnel = Personnel::findOrFail($id);
@@ -54,7 +62,7 @@ class Personnelcontroller extends Controller
             $personnel->telephone = $request->telephone;
             $personnel->role_id = $request->role_id;
             
-            $res = $personnel->update($id);
+            $res = $personnel->update();
 
             return response()->json([
                 "result" => $res
@@ -69,7 +77,8 @@ class Personnelcontroller extends Controller
 
     public function delete($id) {
         if(Personnel::where("id", $id)->exists()) {
-            $res = Personnel::deleted($id);
+            $personnel = Personnel::find($id);
+            $res = $personnel->delete();
             return response()->json([
                 "result" => $res
             ]);

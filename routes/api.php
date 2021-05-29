@@ -22,13 +22,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('get-roles', [RoleController::class, 'index']);
-Route::get('show-role', [RoleController::class, 'show']);
+Route::get('paginate-role', [RoleController::class, 'paginate']);
+Route::get('show-role/{id}', [RoleController::class, 'show']);
 Route::post('add-role', [RoleController::class, 'store']);
-Route::put('update-role', [RoleController::class, 'update']);
-Route::delete('delete-role', [RoleController::class, 'delete']);
+Route::put('update-role/{id}', [RoleController::class, 'update']);
+Route::delete('delete-role/{id}', [RoleController::class, 'delete']);
 
 Route::get('get-personnels', [Personnelcontroller::class, 'index']);
-Route::get('show-personnel', [Personnelcontroller::class, 'show']);
+Route::get('paginate-personnel', [Personnelcontroller::class, 'paginate']);
+Route::get('show-personnel/{id}', [Personnelcontroller::class, 'show']);
 Route::post('add-personnel', [Personnelcontroller::class, 'store']);
-Route::put('update-personnel', [Personnelcontroller::class, 'update']);
-Route::delete('delete-personnel', [Personnelcontroller::class, 'delete']);
+Route::put('update-personnel/{id}', [Personnelcontroller::class, 'update']);
+Route::delete('delete-personnel/{id}', [Personnelcontroller::class, 'delete']);
